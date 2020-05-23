@@ -1,0 +1,226 @@
+#include<iostream>
+#include<conio.h>
+#include<cstdlib>
+#include<cstring>
+#include<string.h>
+
+using namespace std;
+static int k=0;
+class travel
+{
+	
+  private:
+    char busno[5],driver[20], arrival[10], depart[10], from[10], to[10], seat[8][4][10];
+  public:
+    void install();
+	void empty();
+	void allot();
+    void show();
+	void position(int i);
+	void available();
+}bus[10];
+
+void travel::install()
+  {     
+        system("cls");
+        cout<<"\n\n\t\t\t Grrrrrrr......installing a bus!!";
+    	cout<<"\n\n\t\t\t Enter the bus number: ";
+    	cin>>bus[k].busno;
+    	cout<<"\n\t\t\t Enter the driver's name: ";
+    	fflush(stdin);
+    	cin.getline(bus[k].driver,20);
+    	cout<<"\n\t\t\t Enter the arrival time: ";
+    	cin>>bus[k].arrival;
+    	cout<<"\n\t\t\t Enter the departure time: ";
+    	cin>>bus[k].depart;
+    	cout<<"\n\t\t\t From:  ";
+    	cin>>bus[k].from;
+    	cout<<"\n\t\t\t To:  ";
+    	cin>>bus[k].to;
+    	bus[k].empty();
+    	k++;
+    	cout<<"\n\n\n\n\t\t\tYOUR BUS IS READY TO GO!! ";
+    	getch();
+	}	
+	
+void travel::empty()
+{
+		for(int i=0;i<8;i++)
+		{
+			for(int j=0;j<4;j++)
+			{
+				strcpy(bus[k].seat[i][j],"--");
+			}
+		}
+}
+
+void travel::allot()	
+{   
+    system("cls");
+    cout<<"\n\n\t\t\t Wroooooom......lets go!!";
+	char number[5];
+	int seat;
+	top:
+	cout<<"\n\n\t\t\t Enter the bus number: ";
+	cin>>number;
+	int n;
+	for(n=0;n<k;n++)
+	{
+		if(strcmp(bus[n].busno,number)==0)
+		   break;
+	}
+	while(n<=k)
+	{   
+	    mid: 
+		cout<<"\n\t\t\t Enter seat number: ";
+		cin>>seat;
+		if(seat>32)
+		 cout<<"\n\t\t\t ENTER A VALID SEAT NUMBER!! THERE ARE ONLY 32 SEATS IN THE BUS ";
+		else
+		{
+			if(strcmp(bus[n].seat[seat/4][(seat%4)-1],"--")==0)
+			 {
+			 	cout<<"\n\t\t\t Enter passenger first name: ";
+			 	cin>>bus[n].seat[seat/4][(seat%4)-1];
+			 	break;
+			 }
+			 else
+			 {
+			 	cout<<"\n\t\t\t Seat is reserved!!";
+			 	goto mid;
+			 }
+		}
+	}
+	if(n>k)
+	{
+		cout<<"\n\t\t\t Enter a valid bus number!!!";
+		goto top;
+	}
+	cout<<"\n\n\n\t\t\t BOOKED SUCCESFULLY! "<<endl;
+	cout<<"\t\t\t WISH YOU A HAPPY JOURNEY!! "<<endl;
+	getch();
+}
+
+void vline(char ch)
+{
+	for(int i=120;i>0;i--)
+	{
+		cout<<ch;
+	}
+}
+
+void travel::position(int n)
+{
+	int s=0,p=0;
+	int i;
+	int j;
+	for(int i=0;i<8;i++)
+	{
+		cout<<"\n";
+		for(int j=0;j<4;j++)
+		{
+			s++;
+			if(strcmp(bus[n].seat[i][j],"--")==0)
+			{
+				cout.width(5);
+                cout.fill(' ');
+                cout<<s<<".";
+                cout.width(10);
+                cout.fill(' ');
+                cout<<bus[n].seat[i][j];
+                p++;
+			}
+			else
+			{
+				cout.width(5);
+                cout.fill(' ');
+                cout<<s<<".";
+                cout.width(10);
+                cout.fill(' ');
+                cout<<bus[n].seat[i][j];
+			}
+		}
+	}
+}
+
+void travel::show()
+{  
+    
+	int n;
+	char number[5];
+	cout<<"\n\n\t\t\t Enter the bus number: ";
+	cin>>number;
+	for(n=0;n<=k;n++)
+	{
+		if(strcmp(bus[n].busno,number)==0)
+		 break;
+	}
+	while(n<=k)
+	{
+		vline('*');
+		cout<<"\n\n\t bus no:"<<bus[n].busno<<"\t\t driver name: "<<bus[n].driver
+		<<"\n\t Time of arrival:  "<<bus[n].arrival<<"Time of departure: \t"<<bus[n].depart
+		<<"\n\t From: \t"<<bus[n].from<<"\t\t To: \t"<<bus[n].to<<endl;
+		vline('*');
+		bus[0].position(n);
+		break;
+	}
+	if(n>k)
+	{
+		cout<<"\n\t\t\tEnter the correct bus number!!";
+	}
+	getch();
+}
+ 
+ void travel::available()
+ {
+ 	
+ 	for(int i=0;i<k;i++)
+ 	{
+ 	    vline('*');
+		cout<<"\n\t\t\t bus no: "<<bus[i].busno;
+		cout<<"\n\t\t\t driver name: "<<bus[i].driver;	
+		cout<<"\n\t\t\t time of arrival : "<<bus[i].arrival;
+		cout<<"\n\t\t\t time of departure : "<<bus[i].depart;
+		cout<<"\n\t\t\t from: "<<bus[i].from;
+		cout<<"\n\t\t\t To: "<<bus[i].to<<endl;
+		vline('*');
+        cout<<"\n\n";	
+	}
+	getch();
+
+}
+
+int main()
+{  
+   system("cls");
+   system("color b");
+   int ch;
+   while(1)
+   {
+   	system("cls");
+   	cout<<"\n\n\t\t\t WELCOME TO MAHENDRA TRAVELS!!!";
+   	cout<<"\n\t\t\t How could we help you? ";
+   	cout<<"\n\n\t\t\t 1.install \n\t\t\t 2.book tickets \n\t\t\t 3.show my bus \n\t\t\t 4.show available bus service \n\t\t\t 5.exit\n";
+   	cout<<"\n\n\t\t\t ENTER YOUR CHOICE: ";
+   	cin>>ch;
+   	
+   	switch(ch)
+   	{   menu:
+   		case 1: bus[k].install();
+   		        break;
+   		case 2: bus[k].allot();
+   		        break;
+   		case 3: bus[0].show();
+   		        break;
+   		case 4: bus[0].available();
+   		        break;
+   		case 5: exit(0);
+   		
+   		default: cout<<"\n\t\t\t ERROR: INVALID CHOICE!!!";
+   		        
+	}
+   }
+return 0;
+}
+
