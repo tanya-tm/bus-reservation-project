@@ -6,11 +6,13 @@
 
 using namespace std;
 static int k=0;
+//class declaration
 class travel
 {
-	
+//data members:	
   private:
     char busno[5],driver[20], arrival[10], depart[10], from[10], to[10], seat[8][4][10];
+//function members:
   public:
     void install();
 	void empty();
@@ -18,8 +20,9 @@ class travel
     void show();
 	void position(int i);
 	void available();
-}bus[10];
+}bus[10]; //object bus
 
+//function to install a bus service: 
 void travel::install()
   {     
         system("cls");
@@ -42,7 +45,7 @@ void travel::install()
     	cout<<"\n\n\n\n\t\t\tYOUR BUS IS READY TO GO!! ";
     	getch();
 	}	
-	
+//function to check seats are empty 	
 void travel::empty()
 {
 		for(int i=0;i<8;i++)
@@ -54,6 +57,7 @@ void travel::empty()
 		}
 }
 
+//function to allot seats
 void travel::allot()	
 {   
     system("cls");
@@ -101,6 +105,7 @@ void travel::allot()
 	getch();
 }
 
+//for displaying a line of character
 void vline(char ch)
 {
 	for(int i=120;i>0;i--)
@@ -109,6 +114,7 @@ void vline(char ch)
 	}
 }
 
+//assign position of seat in the bus
 void travel::position(int n)
 {
 	int s=0,p=0;
@@ -143,6 +149,7 @@ void travel::position(int n)
 	}
 }
 
+//displays seating info of passengers
 void travel::show()
 {  
     
@@ -172,6 +179,7 @@ void travel::show()
 	getch();
 }
  
+ //displays available bus services
  void travel::available()
  {
  	
@@ -201,10 +209,13 @@ int main()
    	system("cls");
    	cout<<"\n\n\t\t\t WELCOME TO MAHENDRA TRAVELS!!!";
    	cout<<"\n\t\t\t How could we help you? ";
+	//menu control:
    	cout<<"\n\n\t\t\t 1.install \n\t\t\t 2.book tickets \n\t\t\t 3.show my bus \n\t\t\t 4.show available bus service \n\t\t\t 5.exit\n";
-   	cout<<"\n\n\t\t\t ENTER YOUR CHOICE: ";
+   	//choice from user:
+	cout<<"\n\n\t\t\t ENTER YOUR CHOICE: ";
    	cin>>ch;
    	
+	//switch case for choice ch
    	switch(ch)
    	{   menu:
    		case 1: bus[k].install();
